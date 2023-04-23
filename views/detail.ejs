@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('./component/header') %>
+<link rel="stylesheet" href="/form.css">
+<link rel="stylesheet" href="/navigation.css">
+<link rel="stylesheet" href="/detail.css">
+<body>
+    <%- include('./component/navigation') %>
+   <main>
+
+      <section>
+   
+
+         <h1> <%= posts.title %></h1>
+         <div class="top">
+        
+            <p>Date:  <%= posts.datetostring %></p>
+            <p>posted by    <%= posts.authorname %></p>
+         </div>
+
+     
+         <div class="body">
+            <%= posts.contents %>
+         </div>
+ 
+        
+      </section>
+      
+   </main>
+</body>
+</html>

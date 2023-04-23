@@ -1,0 +1,38 @@
+.footer{
+    display: flex;
+    justify-content: space-between;
+}
+.footer > button,form{
+    background-color: green;
+    padding: 5px 25px;
+    color: white;
+    border: 0px solid white;
+    font-weight: bold;
+}
+
+.footer form{
+
+    background-color: red;
+    font-size: 13px;
+    cursor: pointer;
+
+}
+.img{
+
+    overflow: hidden;
+}
+.card img{
+    width:100%;
+    
+    object-fit: cover;
+    transform: scale(0.85);
+
+
+  
+    
+}
+
+article.card{
+    padding:0px;
+    margin: 0px;
+}

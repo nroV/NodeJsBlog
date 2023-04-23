@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('./component/header') %>
+<link rel="stylesheet" href="/form.css">
+<link rel="stylesheet" href="/navigation.css">
+<body>
+    <%- include('./component/navigation') %>
+   <main>
+      <h1>Edit a blog</h1>
+      <section>
+        <form action="/updatepost" method="post">
+            <input type="text" name="id" id="" value="<%= posts.id%> " hidden>
+            <div class="form-row">
+                <label for="">Title</label>
+                <br>
+                <input type="text" name="title" id="" value="<%= posts.title %>">
+            </div>
+            <div class="form-row">
+                <label for="">Summary</label>  <br>
+                <input type="text" name="sum" id="" value="<%= posts.summary %>">
+            </div>
+            <div class="form-row">
+                <label for="">Content</label>  <br>
+                <input type="text" name="content" id="" value="<%= posts.content %>">
+            </div>
+
+            <div class="form-row">
+                <label for="">Author</label>  <br>
+                <select name="author" id="" >
+                    <% for(const author of authors){ %>
+                    <option value="<%= author['id'] %>"><%= author['name'] %></option>
+             
+                    <% }%>
+                </select>
+                
+            </div>
+            <div class="form-row">
+                <label for="">Author</label>  <br>
+                <input type="submit" value="Save">
+                
+            </div>
+              
+                
+        </form>
+      </section>
+      
+   </main>
+</body>
+</html>

@@ -1,0 +1,156 @@
+:root {
+    --primary-color: #0A2647;
+    --secondary-color: #144272;
+    --text-color: #F7EFE5;
+    --last-color: #205295;
+
+}
+
+section {
+    max-width: 1400px;
+    display: grid;
+
+
+    grid-template-columns: repeat(12, 1fr);
+    gap: 50px;
+    margin: 100px auto;
+
+}
+
+section>.left-content {
+    grid-column: span 8;
+}
+
+.left-content img,
+.right-content img {
+    width: 100%;
+
+    height: 600px;
+    object-fit: cover;
+}
+
+.left-content .body {
+    line-height: 2.5;
+
+}
+
+section>.right-content {
+    grid-column: span 4;
+    margin-top: 90px;
+    gap: 20px 40px;
+
+}
+
+.right-content>.card {
+    display: flex;
+    gap: 60px 30px;
+    align-items: center;
+}
+
+
+.right-content>.card {
+    margin-bottom: 20px;
+}
+
+.card>img {
+
+    object-fit: cover;
+    height: 180px;
+
+}
+
+.left-content div.body {
+    font-size: 1.1em;
+    font-weight: 200;
+}
+
+.card>div.body {
+    font-size: 1.5em;
+}
+
+div.body>.footer {
+    font-size: 0.56em;
+    font-weight: 200;
+}
+
+.body {
+    color: black;
+    font-weight: bold;
+    white-space: normal;
+}
+
+.comments {
+    grid-column: span 6;
+}
+
+.cmt form>input {
+    width: 100%;
+    font-size: 1em;
+    height: 40px;
+    border: 0px solid;
+    text-indent: 2em;
+
+    background-color: var(--text-color);
+}
+
+.cmt form>textarea {
+    width: 100%;
+    font-size: 1.1em;
+
+    font-family: 'Oswald', sans-serif;
+    font-family: 'Roboto Condensed', sans-serif;
+    line-height: 4;
+    border: 0px solid;
+    height: 140px;
+    background-color: var(--text-color);
+    text-indent: 2em;
+ 
+
+
+}
+.cmt form>input[type=submit] {
+
+
+    background-color: var(--last-color);
+    color: white;
+}
+
+div.more {
+    grid-column: span 12;
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 50px   ;
+}
+
+div.more > h2{
+    grid-column: span 3;
+}
+.footer > p{
+    color:rgba(0, 0, 0, 0.55);
+    font-weight: 700;
+    font-size: 1.2em;
+}
+
+.footer > p:nth-child(2){
+    color: #0A2647;
+    
+}
+div.more > a{
+    background-color: white;
+    color:black;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.35);
+
+}
+div.card-body > div.card-title{
+    font-size: 1.4em;
+    font-weight: bold;
+}
+
+div.card > img{
+    width: 100%;
+
+    height: 300px;
+
+    object-fit: cover;
+}
+

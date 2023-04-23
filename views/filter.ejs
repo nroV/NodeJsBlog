@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('./component/header') %>
+    <link rel="stylesheet" href="/navigation.css">
+
+
+    <link rel="stylesheet" href="/media.css">
+
+    <link rel="stylesheet" href="/buttonstyle.css">
+    <link rel="stylesheet" href="/category.css">
+
+    <body>
+        <%- include('./component/navigation',{
+            category:category,
+
+            session: session.userid
+          
+          }) %>
+
+            <main>
+
+                <div class="article">
+
+                        <div class="head">
+                            <h3>Result: <%= posting.length %></h3>
+                            <div class="box_parent">
+                                <div class="box"></div>
+                            </div>
+                        </div>
+                        <% if(posting.length ===0){ %>
+                            <div class="sorry " style="grid-column: span 4;text-align: center;">
+                                <h3 style="">Search not found
+                                </h3> 
+                              
+                                <p>  We couldnt find any articles based on your search
+
+
+                                    <a href="/#search" style="color: navy; font-weight: bold;">Try search another</a>
+                                </p>
+                             
+                                <img src="/uploads/121826-loading-sand-clock.gif" alt="lottiesanimation"  
+                                
+                                    style="max-width: 600px; height: 600px;mix-blend-mode: multiply;
+                                    "
+                                >
+
+                            </div>
+                           
+                         <% }else{%>
+                     
+                        <% for(const posts of posting) {%>
+                            <a href="/postdetails/<%= posts.id%>">
+                            
+                                <div class="con">
+    
+                                    <img src="/uploads/<%= posts.images %>"
+                                        alt="ads" srcset="" style="max-width:100%;margin-top: 25px;">
+    
+                                    <div class="content">
+    
+                                        <div class="title">
+                                          <%= posts.title %>
+                                        </div>
+                                        <div class="category">
+                                            <%= posts.type %>
+                                        </div>
+                                        <div class="date">
+                                            <p>
+                                                <%= posts.date.toLocaleDateString() %>
+                                            </p>
+                                            <p>
+                                                <%= posts.views %> views
+                                            </p>
+                                        </div>
+                                    </div>
+    
+                                </div>
+                          
+    
+                            </a>
+                            <% }%>
+                        <% }%> 
+   
+                </div>
+            </main>
+            <% if(!posting.length ===0){ %>
+            <section style="max-width: 100%;display: flex;justify-content: center;">
+                <div class="load">Load More</div>
+            </section>
+            <% } %>
+            <%- include('./component/footer') %>
+           
+    </body>
+
+</html>

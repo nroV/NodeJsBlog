@@ -1,0 +1,49 @@
+.article {
+    display: grid;
+    grid-template-columns: 2.5fr 1fr;
+    gap: 25px   25px;
+
+}
+
+.article>.left {
+    display: grid;
+
+    gap: 25px   25px;
+
+}
+
+.left>.content {
+
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px   25px;
+
+
+
+}
+
+.article>.right {
+    display: grid;
+    align-content: start;
+    gap: 25px   25px;
+
+
+
+}
+
+.con {
+
+    display: grid;
+
+    grid-template-columns: 1.2fr 1fr;
+    align-content: center;
+    align-items: center;
+    gap: 20px 25px;
+
+}
+.left {
+    display: flex;
+    margin-right: 0px;
+}
+
+

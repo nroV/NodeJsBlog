@@ -1,0 +1,84 @@
+<header>
+
+    <ul>
+        <div class="logo">
+            <a href="/">
+                <h2>Vorn Blog
+    
+    
+             
+                </h2>
+            </a>
+           
+        </div>
+        <div class="category">
+            <% for(const cate of category) {%>
+             <z></z>
+            <li><a href="/post/<%= cate.id %>"><%= cate.type %></a></li>
+                        
+            <% }%>
+        </div>
+        <div class="left">
+          
+            <li><a href="/create-post   ">Post blog</a></li>   
+            <% if(session) {%>
+                <li><a href="/logout" id="logout">Logout</a></li> 
+            <% }else{%>
+               
+        
+                <li><a href="/signup">Login / SignUp</a></li>
+           
+                <% }%>
+           <script>
+                    localStorage.setItem("loginsession",false)
+                    let logout = document.querySelector("#logout")
+                    logout.addEventListener("click",()=>{
+                        window.location.href="/"
+                    })
+              
+                 </script>  
+           
+        </div>
+        <div class="three">
+          
+                <span></span>
+                <span></span>
+                <span></span>
+           
+        </div>
+    
+    </ul>
+    <ul style="display: none;" id="three">
+     
+        <div class="listcate" >
+            <% for(const cate of category) {%>
+             <z></z>
+            <li style="margin-bottom: 30px;"><a href="/post/<%= cate.id %>"><%= cate.type %></a></li>
+                        
+            <% }%>
+        </div>
+        <div class="listcate" >
+          
+            <li>
+                <!-- <a href="/create-post   ">Post blog</a> -->
+            </li>   
+            <% if(session) {%>
+                <p style="text-align: center;background-color: bisque;padding: 15px;color: black;padding: 10px 25px;font-weight: bold;"><a href="/logout" id="logout" style="color: black;">Logout</a></p> 
+            <% }else{%>
+               
+        
+                <p style="text-align: center;color: black;padding: 10px 25px;font-weight: bold;"><a href="/signup" style="color: black;text-align: center;background-color: bisque;padding: 15px;">Login / SignUp</a></p>
+           
+                <% }%>
+   
+           
+        </div>
+   
+    
+    </ul>
+
+    <!-- <navbar>
+        <li><a href="/post">All posts</a></li>
+        <li><a href="/create-post   ">Create</a></li>
+    </navbar> -->
+</header>

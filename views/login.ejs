@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('./component/header') %>
+
+    <link rel="stylesheet" href="/navigation.css">
+    <link rel="stylesheet" href="/loginandsignup.css">
+    <script src="/javascript/validationlogin.js"></script>
+    <style>
+        #err,
+        #err1,
+        #err2,
+        #err3 {
+            display: none;
+        }
+
+        .error {
+            display: block;
+        }
+        .emailerr::placeholder{
+            color: rgb(179, 8, 8);
+            font-weight: bold;     
+        }
+        .passworderr::placeholder{
+            color: rgb(179, 8, 8);
+            font-weight: bold;    
+        }
+        .bgborder{
+            border: 1px solid rgb(179, 8, 8);
+        }
+
+        @media only screen and (max-width: 760px) {
+            section>p {
+                text-align: left;
+            }
+
+            main {
+                max-width: 650px;
+                margin: 120px auto;
+
+            }
+
+
+        }
+
+        @media only screen and (max-width: 400px) {
+
+            section>p {
+                text-align: left;
+            }
+
+
+        }
+    </style>
+
+    <body>
+
+        <main>
+
+
+
+
+            <section>
+
+                <p style="text-align: center;">Login</p>
+
+                <p style="font-size: 1.1em;font-weight:600;color: gray;margin-bottom:50px;text-align: center;">You can
+                    accomplish this
+                    Welcome back master</p>
+                <form action="/loginuser" method="post" enctype="multipart/form-data" id="enter">
+                    <div class="form-row">
+                        <div style="display: flex; justify-content: space-between;" class="inner">
+                            <label for="">Email</label>
+                            <label for="" style=""></label>
+                            <label for=""><%= wrong %></label>
+                        </div>
+
+                        <br>
+                        <input type="text" name="email" id="" class="email" value="" placeholder="yourname@example.com">
+
+
+
+                    </div>
+                    <div class="form-row">
+                        <div style="display: flex; justify-content: space-between;" class="inner">
+                            <label for="">Password</label> <br>
+                            <label for="" style=""></label>
+                            <label for=""><%= wrong %></label>
+                        </div>
+
+                        <input type="text" name="password" id="" placeholder="@password" style="margin-top: 15px;"
+                            class="password">
+                    </div>
+
+
+                    <div class="form-row">
+
+                        <input type="submit" value="Login" class="sub" style="color: black;">
+
+                    </div>
+
+
+
+                </form>
+                <center style="color: bisque;">
+                    New member here? <a href="/signup">create an account here</a>
+                </center>
+            </section>
+
+        </main>
+        <script>
+
+            let enters = document.querySelector("#enter")
+            let email = document.querySelector("input.email")
+            let password = document.querySelector("input.password")
+            enters.addEventListener("submit", (e) => {
+                if (email.value.length === 0 || password.value.length ===0 ) {
+                    e.preventDefault()
+               
+                    email.classList.add("emailerr")
+                    email.style.border="2px solid  rgb(179, 8, 8)"
+                    password.style.border="2px solid  rgb(179, 8, 8)"
+                    password.classList.add("passworderr")
+                    email.placeholder="missing email field*"
+                    password.placeholder="missing password field*   "
+                }
+            })
+        </script>
+
+</body>
+
+</html>

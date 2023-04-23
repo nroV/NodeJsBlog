@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('./component/header') %>
+    <link rel="stylesheet" href="/navigation.css">
+
+
+    <link rel="stylesheet" href="/media.css">
+
+    <link rel="stylesheet" href="/buttonstyle.css">
+    <link rel="stylesheet" href="/category.css">
+
+    <body>
+        <%- include('./component/navigation',{ category:category }) %>
+
+
+            <main>
+
+                <div class="article">
+
+                        <div class="head">
+                            <h3><%= single.categoryname %></h3>
+                            <div class="box_parent">
+                                <div class="box"></div>
+                            </div>
+                        </div>
+                     <% if(post.length <=0) {%>
+                        <div class="sorry " style="grid-column: span 4;text-align: center;">
+                            <h3 style="">Result 0
+                            </h3> 
+                          
+                            <p>  We couldnt find any articles based on the category
+
+
+                                <a href="/#search" style="color: navy; font-weight: bold;">Try searching for it</a>
+                            </p>
+                         
+                            <img src="/uploads/121826-loading-sand-clock.gif" alt="lottiesanimation"  
+                            
+                                style="max-width: 280px; max-height: 1200px;mix-blend-mode: multiply;object-fit: cover;
+                                "
+                            >
+
+                        </div> <% } %>
+                   
+                        <% for(const posts of post) {%>
+                        <a href="/postdetails/<%= posts.id%>/1">
+                        
+                            <div class="con">
+
+                                <img src="/uploads/<%= posts.images %>"
+                                    alt="ads" srcset="" style="max-width:100%;margin-top: 25px;">
+
+                                <div class="content">
+
+                                    <div class="title">
+                                      <%= posts.title %>
+                                    </div>
+                                    <div class="category">
+                                        <%= posts.type %>
+                                    </div>
+                                    <div class="date">
+                                        <p>
+                                            <%= posts.date.toLocaleDateString('en-US',{
+                                                
+                                            
+                                                                weekday: 'long',
+                                                                year: 'numeric',
+                                                                month: 'short',
+                                                                day: 'numeric',
+                                                     
+                                            }) %>
+                                        </p>
+                                        <p>
+                                            <%= posts.views %> views
+                                        </p>
+                                    </div>
+                                </div>
+
+                            </div>
+                      
+
+                        </a>
+                        <% }%>
+                        
+   
+                </div>
+            </main>
+            <% if(post.length > 8) {%>
+            <section style="max-width: 100%;display: flex;justify-content: center;">
+                <div class="load">Load More</div>
+            </section>
+            <% } %>
+            <%- include('./component/footer') %>
+
+    </body>
+
+</html>

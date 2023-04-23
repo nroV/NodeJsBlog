@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('./component/header') %>
+  <link rel="stylesheet" href="/navigation.css">
+  <link rel="stylesheet" href="/postitem.css">
+  <link rel="stylesheet" href="/paralax.css">
+  <link rel="stylesheet" href="media.css">
+  <link rel="stylesheet" href="content.css">
+  <link rel="stylesheet" href="buttonstyle.css">
+  <style>
+    .addplaceholder::placeholder {
+      /* Chrome, Firefox, Opera, Safari 10.1+ */
+      color: red;
+      opacity: 1;
+      /* Firefox */
+
+    }
+
+    .bgcolor {
+      border: 1px solid red;
+
+    }
+  </style>
+
+  <body>
+    <%- include('./component/navigation',{ category:category, isloginss:islogin, session: session.userid }) %>
+
+      <section class="paralax">
+        <div class="bg-image">
+          <div class="content">
+            <div class="header">
+              The CareerFoundry Blog
+              Discover your corner of the tech world.
+            </div>
+            <div class="body">
+              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sed quod pariatur beatae architecto corporis
+              velit, eligendi reiciendis tenetur doloribus eveniet, dolores iure neque at nobis laborum officia aperiam
+              dolorem voluptates!
+            </div>
+
+            <button><a href="/post/1">Read Article</a></button>
+          </div>
+
+        </div>
+      </section>
+      <main>
+        <h3>Recent Post</h3>
+        <div class="box_parent">
+          <div class="box"></div>
+        </div>
+
+
+
+        <article>
+          <h2>
+            <%if(islogin==true){ %>
+              <script>
+                localStorage.setItem("loginsession", true)
+              </script>
+              <% } %>
+          </h2>
+
+          <div class="left-wrapper" style="background-image: url('/uploads/<%= single.img %>');">
+
+            <div class="inner">
+              <div class="row-header" style="color: gray;filter: brightness(160%);">
+                <p>
+                  <%= single.type %>
+                </p>
+                <p>
+                  <%= single.date.toLocaleDateString('en-US',{ weekday: 'long' , year: 'numeric' , month: 'short' ,
+                    day: 'numeric' , }) %>
+                </p>
+              </div>
+              <div class="row-title">
+                <a href="/postdetails/<%= single.id%>/1">
+                  <%= single.title %>
+                </a>
+              </div>
+              <div class="row-desc" style="color: gray;filter: brightness(160%);">
+                <%= single.contents %>
+              </div>
+              <div class="row-footer"></div>
+            </div>
+
+          </div>
+
+
+          <div class="right-wrapper">
+            <% for(const post of posts) {%>
+              <a href="/postdetails/<%= post.id%>/1">
+                <div class="left-card">
+
+                  <div class="img-left" style="">
+                    <img src="/uploads/<%= post.images %>" alt="uploadimg" srcset="">
+
+                  </div>
+                  <div class="content">
+                    <div class="date">
+                      <p style="font-weight: bold;">
+                        <%= post.date.toLocaleDateString('en-US',{ weekday: 'long' , year: 'numeric' , month: 'short' ,
+                          day: 'numeric' , }) %>
+                      </p>
+                      <p style="font-weight: bold;">
+                        <%= post.views %> views
+                      </p>
+                    </div>
+                    <div class="title">
+                      <%= post.title %>
+                    </div>
+                  </div>
+                  <hr>
+                </div>
+              </a>
+              <% }%>
+          </div>
+
+
+
+
+          <!--         
+      <% for(const post of posts) { %>
+      <%- include('./component/postitem',{post:post}) %>
+      <% } %> -->
+
+        </article>
+      </main>
+
+      <main>
+
+        <div class="article">
+          <section class="left">
+            <div class="header">
+              <h3 id="search">Feature for Member</h3>
+              <div class="box_parent">
+                <div class="box"></div>
+              </div>
+
+            </div>
+
+            <form action="/search" method="POST" class="searchbar"
+              style="background-color:lightblue;display: flex;align-items: center;gap: 10px ;padding: 0px;font-size: 1em;">
+              <input type="text" id="ss" style="height: 50px;flex-basis: 800px;font-size: 1.1em;"
+                placeholder="search your blog title here..." name="search" class="bgco">
+
+              <input type="submit" id="sub" style="height: 50px;flex-basis: 150px;font-size: 1.1em;" value="search">
+
+
+
+
+            </form>
+
+
+
+
+            <div class="content">
+              <% for(const post of posts) { %>
+                <a href="/postdetails/<%= post.id %>/1">
+                  <div class="left-card" style="align-items: center;">
+                    <div class="img-left" style="">
+                      <img src="/uploads/<%= post.images %>" alt="" srcset="">
+
+                    </div>
+                    <div class="content">
+                      <div class="title">
+                        <%= post.title %>
+                      </div>
+                      <div class="date">
+                        <p>
+                          <%= post.date.toLocaleDateString('en-US',{
+                                                
+                                            
+                            weekday: 'short',
+                            year: 'numeric',
+                            month: 'short',
+                            day: 'numeric',
+                 
+          }) %>
+                        </p>
+                        <p>View:100</p>
+                      </div>
+
+                    </div>
+
+                  </div>
+                </a>
+                <% } %>
+
+            </div>
+
+
+          </section>
+          <section class="right">
+            <div class="head">
+              <h3>Popular Posts</h3>
+              <div class="box_parent">
+                <div class="box"></div>
+              </div>
+            </div>
+
+            <% for(const post of popular) { %>
+              <a href="/postdetails/<%= post.id %>/1">
+                <div class="con">
+
+                  <img src="/uploads/<%= post.images %>" alt="ads" srcset="" style="max-width:100%">
+
+
+                  <div class="content">
+
+                    <div class="title">
+                      <%= post.title %>
+                    </div>
+                    <div class="date">
+                      <p>
+                        <%= post.date.toLocaleDateString() %>
+                      </p>
+                      <p>
+                        <%= post.views %> views
+                      </p>
+                    </div>
+                  </div>
+
+
+                </div>
+              </a>
+              <% } %>
+          </section>
+
+
+        </div>
+      </main>
+
+      <!-- <section style="max-width: 100%;display: flex;justify-content: center;">
+        <div class="load">Load More</div>
+      </section> -->
+      <%- include('./component/footer') %>
+        <script>
+
+
+          let search = document.querySelector("input#ss")
+          let onsubmiting = document.querySelector("form.searchbar")
+          search.addEventListener("input", (e) => {
+            console.log(e.target.value)
+          })
+
+          onsubmiting.addEventListener("submit", (e) => {
+
+            if (search.value.length === 0) {
+              e.preventDefault()
+              console.log("Empty")
+              search.placeholder = "Please input your information here..."
+              search.classList.toggle("addplaceholder", "bgcolor")
+            }
+            else {
+
+            }
+          })
+
+        </script>
+
+  </body>
+
+</html>

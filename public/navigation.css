@@ -1,0 +1,176 @@
+:root{
+    --primary-color:#0A2647;
+    --secondary-color:#144272;
+    --text-color:#F7EFE5;
+    --last-color:#205295;
+    
+}
+body{
+   
+}
+header{
+    position: sticky;
+    top: 0px;
+    overflow: hidden;
+}
+header ul{
+    max-width:100%;
+    display: flex;
+    align-items: center;
+    justify-content:space-between;
+    color: white;
+    background-color:var(--primary-color);
+    margin: 0px;
+    box-sizing: border-box;
+
+
+   
+}
+div.category {
+    display: flex;
+}
+
+.logo{
+    margin-left: 25px;
+}
+navbar{
+
+
+
+
+    padding: 0px;
+    display: flex;
+    align-items:center;
+    justify-content: center;
+
+
+
+    
+}
+a{
+    color: white;
+ 
+}
+
+div> li a{
+ 
+    padding: 26px;
+
+}
+
+.left{
+    display: flex;
+    margin-right: 105px;
+}
+navbar li{
+    margin-left: 20px;
+    align-self: center;
+}
+
+
+li a:hover{
+
+background-color:var(--text-color);
+color: var(--primary-color);
+font-weight: bold;
+}
+
+#top a{
+    color:green;
+    font-weight: bold;
+
+}
+#top a:hover{
+    color:#0A2647;
+    font-weight: bold;
+
+}
+
+div.three{
+    display: flex;
+    width: 50px;
+    
+    flex-direction: column;
+ 
+    display: none;
+}
+
+div.three span{
+    padding: 0px;
+    background-color: white;
+    margin-bottom: 8px;
+    height: 2px;
+
+
+}
+.listcate p > a:hover{
+   
+     background-color: #F7EFE5;
+}
+#three{
+    display: flex;
+   
+    position: fixed;
+    font-size: 1.5em;
+    align-items: center;
+    flex-direction: column;
+    padding: 100px 0px;
+}
+@media only screen and (min-width: 1081px) {
+ 
+    #three{
+        display: none;
+        height: 100%;
+        position: relative;
+    
+    }
+
+}
+@media only screen and (max-width: 1080px) {
+ 
+    div.category {
+        display: none;
+    }
+
+
+}
+@media only screen and (max-width: 760px) {
+ 
+    div.category {
+        display: none;
+    }
+
+    div.three{
+        display: flex;
+        margin-right: 20px;
+        margin-top: 15px;
+     
+    }
+    li a:hover{
+
+    
+        font-weight: bold;
+        }
+}
+@media only screen and (max-width: 539px) {
+    div.three{
+        display: flex;
+        margin-right: 20px;
+        margin-top: 15px;
+   
+        max-width: 300px;
+        justify-content: center;
+     
+    }
+    div.listcate{
+        font-size: 0.85em;
+        display: flex;
+        width: 100%;justify-content: center;
+        flex-wrap: wrap;
+    }
+    div.category,div.left {
+        display: none;
+    }
+ 
+
+}

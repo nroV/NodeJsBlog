@@ -1,0 +1,22 @@
+h1{
+    font-size: 2.65em;
+}
+
+.top > p {
+    font-size: 1.15em;
+    font-weight:lighter;
+
+ 
+}
+.top{
+    display: flex;
+    max-width: 100%;
+    justify-content: space-between;
+}
+
+.body{
+    color: black;
+    font-weight:bold;
+    white-space: pre-line;
+
+}

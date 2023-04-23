@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('./component/header') %>
+
+    <link rel="stylesheet" href="/navigation.css">
+    <link rel="stylesheet" href="/detail.css">
+    <link rel="stylesheet" href="/read.css">
+    <link rel="stylesheet" href="/readscreen.css">
+
+    <body>
+        <%- include('./component/navigation',{ category:category, session: session.userid }) %>
+
+
+            <section>
+                <div class="left-content">
+                    <h1>
+                        <%= posts.type %>
+                    </h1>
+                    <div style="margin-bottom: 50px;color: rgba(0, 0, 0, 0.55);font-weight: bold;">
+                        Story by <span>
+                            <%= posts.authorname %>
+                        </span>
+                      
+                        <%= posts.date.toLocaleString('en-US',{
+                            weekday: 'long',
+                            year: 'numeric',
+                            month: 'long',
+                            day: 'numeric',
+                        })%>
+                    </div>
+                    <hr style="margin-bottom: 50px;">
+                    <img src="/uploads/<%=  posts.image %>" alt="img-article" id="read">
+                    <div class="title" style="margin-top: 50px; font-size: 1.7em;font-weight: bold;">
+                        <%= posts.title %>
+                    </div>
+                    <div class="body">
+                        <%= posts.content %>
+                    </div>
+
+                    <div class="comments">
+                        <h2>Comments</h2>
+                        <% if(!session.userid) {%>
+                            <p style="color: rgb(103, 0, 0);font-weight: bold;">You must be
+                                <a style="color: rgb(0, 8, 249);" href="/login"> login</a>
+                                to post a comment
+                            </p>
+
+                            <% } %>
+                                <div class="cmt">
+                                    <p style="color: rgb(103, 0, 0);font-weight: bold;">Leave a reply</p>
+                                    <form action="/post/comment/<%= posts.id %>" method="POST" class="commentpost">
+                                        <textarea placeholder="say something" name="txtarea"></textarea>
+
+
+                                        <input type="submit" value="Post Comment" style="margin-top: 20px;">
+
+                                    </form>
+                                    <% if(comments.length> 0) {%>
+                                        <div class="getcmt" style="margin-top: 40px;" id="commentsection">
+                                            <% for(const comment of comments) {%>
+                                                <div class="inner">
+
+                                                    <div class="top " style="align-items: center;">
+                                                        <div class="pf"
+                                                            style="display: flex;width: 100%;align-items: center;">
+                                                            <img src="/uploads/<%= comment.pf %>" alt="pf-name"
+                                                                style="width: 50px;clip-path: circle();height: 50px;margin-right: 25px;">
+                                                            <div class="name" style="font-weight:bold;">
+                                                                <%= comment.username %>
+                                                            </div>
+                                                        </div>
+
+
+
+                                                        <div class="edate" style="font-weight:bold;color: rgba(0, 0, 0, 0.55);font-size: 0.91em;">
+                                                            <!-- <script>
+                                                    const f = new Intl.RelativeTimeFormat ("en-us",{
+                                                        style:"long",
+                                                        numeric:"always"
+                                                    })
+                                                    console.log(f.format(-5,"days"))
+                                                </script> -->
+                    
+
+                                                            <%= comment.date.toLocaleString('en-US',{
+                                                                weekday: 'long',
+                                                                year: 'numeric',
+                                                                month: 'short',
+                                                                day: 'numeric',
+                                                            })%>
+
+
+
+
+
+
+
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="desc">
+                                                        <%= comment.cmt_desc %>
+                                                    </div>
+
+                                                    <hr>
+
+                                                    <% if(session.userid){ %>
+                                                        <div class="edit" style="display: flex;">
+
+
+
+
+                                                            <% if(comment.username===postname.name) {%>
+                                                                <form
+                                                                    action="/comment/delete/ <%= comment.id %>/<%= posts.id  %>"
+                                                                    method="POST" style="color: red">
+
+
+
+                                                                    <button type="submit"
+                                                                        style="background-color: rgb(146, 11, 11);border: 0px solid;color: aliceblue;padding: 7px 15px;border-radius: 10px;">
+                                                                        Delete
+                                                                    </button>
+
+
+
+
+                                                                </form>
+                                                                <% } %>
+
+
+
+
+                                                        </div>
+
+                                                        <% } %>
+                                                </div>
+
+                                                <% }%>
+
+                                                    <% if(comments.length>=2 ) {%>
+                                                        <div class="load"><a
+                                                                href="/postdetails/<%= posts.id%>/<%= page %>#commentsection">Load
+                                                                More</a></div>
+                                                        <% }%>
+
+                                        </div>
+                                        <% }%>
+                                </div>
+
+                    </div>
+
+
+                </div>
+
+                <div class="right-content">
+                    <div class="card">
+                        <h2>Recent articles</h2>
+                    </div>
+                    <% for(const posts of recent) {%>
+                        <a href="/postdetails/<%=posts.id%>/1">
+                            <div class="card">
+                                <img src="/uploads/<%=posts.images%>" alt="">
+                                <div class="body">
+                                    <div>
+                                        <%= posts.title %>
+                                    </div>
+                                    <div class="footer" style="display: flex;justify-content: space-between;">
+                                        <p>
+                                            <%= posts.date.toLocaleDateString('en-US',{
+                                                
+                                            
+                                                                weekday: 'long',
+                                                                year: 'numeric',
+                                                                month: 'short',
+                                                                day: 'numeric',
+                                                     
+                                            }) %>
+                                        </p>
+                                        <p>
+                                            <%= posts.type %>
+                                        </p>
+                                    </div>
+
+
+
+                                </div>
+
+
+                            </div>
+                        </a>
+                        <% }%>
+                </div>
+
+
+                <div class="more">
+                    <h2>More for you</h2>
+                    <% for(const posts of more) {%>
+                        <a href="/postdetails/<%=posts.id%>/1">
+                            <div class="card">
+
+                                <img src="/uploads/<%=posts.images%>" alt="img">
+
+                                <div class="card-body">
+                                    <div class="card-title">
+                                        <%= posts.title %>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </a>
+                        <% }%>
+
+                </div>
+
+
+            </section>
+
+
+            <%- include('./component/footer') %>
+                <!-- <script>
+               let check = localStorage.getItem("loginsession")
+                if(check == true) {
+                        // console.log("user is login")
+                }
+                else{
+                    // console.log("user is not login yet")
+                }
+                let subform = document.querySelector("form.commentpost")
+                subform.addEventListener("submit",(e)=>{
+                    
+                    let check = localStorage.getItem("loginsession")
+                    e.preventDefault()
+                
+                 
+                 
+                    
+                 
+                
+                })
+                  
+                
+       
+              
+            </script>   -->
+
+
+    </body>
+
+</html>

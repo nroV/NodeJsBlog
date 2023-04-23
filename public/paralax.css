@@ -1,0 +1,87 @@
+:root{
+    --primary-color:#0A2647;
+    --secondary-color:#144272;
+    --text-color:#F7EFE5;
+    --last-color:#205295;
+    
+}
+section.paralax {
+    height: 400px;
+    margin-bottom: 200px;
+    color:white;
+
+}
+
+.paralax > .bg-image{
+    padding: 20px;
+    padding-top: 70px;
+    padding-bottom: 70px;
+    margin: 0px;
+   background: url("https://images.unsplash.com/photo-1661956602868-6ae368943878?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80") rgba(0, 0, 0, 0.55);
+   background-repeat: no-repeat;
+   background-size: cover;
+
+   background-blend-mode: darken;
+   background-attachment:fixed;
+   max-width: 1200px;
+   background-position:center;
+   margin: 0px auto;
+}
+
+.bg-image{
+    font-size: 1.36em;
+
+
+    display: grid;
+    grid-template-columns: repeat(12,1fr);
+    align-items: center;
+    gap: 20px 20px  ;
+}
+
+
+.bg-image .content{
+    grid-column: 3 / span 5;
+
+
+
+}
+
+
+.content > .header{
+    font-size: 1.96em;
+    font-weight: 600;
+}
+.content > .header, .body, button{
+    margin-top: 35px;
+}
+div.content button{
+
+    font-size: 1em;
+    background-color: var(--secondary-color);
+    color: white;
+    border: 0px;
+    border-radius: 14px;
+    padding: 10px 25px;
+}
+.row-header {
+    display: flex;
+    justify-content: space-between;
+}
+.row-header > div.date > p{
+    color:rgba(0, 0, 0, 0.35);
+    font-weight:700;
+
+}
+
+.row-title,.title{
+    color: var(--last-color);
+    font-weight: bold;
+    font-size: 1.35em;
+}
+.row-title{
+    color: white;
+    font-size: 1.85em;
+}
+.row-header , .row-title, .row-desc{
+        margin-top: 25px;
+}

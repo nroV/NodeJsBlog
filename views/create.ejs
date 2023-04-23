@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('./component/header') %>
+<link rel="stylesheet" href="/form.css">
+<link rel="stylesheet" href="/navigation.css">
+<style>
+  
+    #err,#err1,#err2,#err3,#err4{
+        display: none;
+    }
+    .error{
+        display: block;
+    }
+    .showerror:focus{
+        background-color: rgb(136, 9, 9);
+    }
+    .shownormal:focus{
+        border: 0px solid;
+    }
+ .hide{
+    display: none;
+ }
+ .hiding{
+
+    display: none;
+ }
+ .unhide{
+    display: block;
+ }
+
+
+ .showauthor{
+    display: block;
+    color: red;
+    font-weight: 600;
+}
+.showtitle{
+    
+    display: block;
+color: red;
+font-weight: 600;
+}
+</style>
+<body>
+    <%- include('./component/navigation',{
+        category:category,
+
+        session: session.userid
+      
+      }) %>
+   <main>
+ 
+        <h1>Post your blog now</h1>
+        <p style="font-size: 1.1em;font-weight:600;color: gray;">You can accomplish this a variety of ways. The key is to touch your reader somehow.</p>
+  
+ 
+      <section>
+        <form action="/postitem" method="post" enctype="multipart/form-data">
+            <div class="form-row">
+                <div style="display: flex; justify-content: space-between;">
+                    <label for="">Title</label>
+                    <span for="" class="hiding" >*Your title should be (5-12 characters long) and no blank</span>
+                    <label for="" id="err" >*Your title is missing</label>
+                </div>
+                
+                <br>
+                <input type="text" name="title" id="" class="title" value="" placeholder="write your title here...">
+           
+             
+            
+            </div>
+            <div class="form-row">
+                <div style="display: flex; justify-content: space-between;">
+                    <label for="">Summary</label>  <br>
+                    <label for="" style="" ></label>
+                </div>
+            
+                <input type="text" name="sum" id=""  placeholder="describe your blog in one sentence...">
+            </div>
+            <div class="form-row">
+                <div style="display: flex; justify-content: space-between;">
+                    <label for="">Author</label>
+                    <span for="" class="hide" >* your names should be (3-15 characters long )</span>
+                    <label for="" style="" id="err4">*Your name is missing</label>
+                </div>
+                <input type="text" name="author" id=""  placeholder="Your name..." class="author">
+            </div>
+             
+            </div>
+            <div class="form-row">
+                <div style="display: flex; justify-content: space-between;">
+                    <label for="">Content</label>
+                    <label for="" style="" id="err2">*Your content is missing</label>
+                </div>
+           
+                <textarea  name="content" id=""placeholder="describe your blog in details..."  class="content"  wrap="physical"
+                style="height: 250px;margin-top: 15px;font-size: 1em;font-family: 'Oswald', sans-serif;  line-height: 2.5;">
+                    </textarea>
+            </div>
+
+            <div class="form-row">
+                <div style="display: flex; justify-content: space-between;">
+                    <label for="">Describe your blog</label>
+                    <label for="" style="" id="err"></label>
+                </div>
+                <select name="author" id="" class="category">
+                    <% for(const categories of category){ %>
+                    <option value="<%=  categories['id'] %>"><%=  categories['type'] %></option>
+             
+                    <% }%>
+                </select>
+                
+            </div>
+
+            <div class="form-row">
+                <label for="">Upload file</label>  <br>
+                <input type="file" name="file" id="" class="file" style="padding: 20px 0px;">
+                <label id="err1">*Your file is missing</label>
+            </div>
+            <div class="form-row">
+          
+                <input type="submit" value="Save" class="sub">
+                
+            </div>
+              
+                
+        </form>
+      </section>
+      
+   </main>
+   <script>
+       let inputsubmit = document.querySelector("form");
+       let title = document.querySelector("input.title")
+
+       let content = document.querySelector("textarea.content")
+       let category = document.querySelector("select")
+       let file = document.querySelector("input.file")
+       let author= document.querySelector("input.author")
+       let labeltitle = document.querySelector("#err")
+       let labelcontent = document.querySelector("#err2")
+       let labelfile = document.querySelector("#err1")
+       let labelauthor = document.querySelector("#err4")
+
+
+       inputsubmit.addEventListener("submit",(e)=>{
+    
+        console.dir(file.files.length)
+        // console.log(title.value)
+        if(file.files.length==0 ||title.value.length === 0 ||content.value.length === 0  || labelauthor.value.length === 0){
+            e.preventDefault()
+            if(file.files.length==0){
+            console.log("file is empty")
+            labelfile.style.display="block"
+            labelfile.style.color="red"
+            
+        }
+        else{
+            labelfile.style.display="none"
+        
+        }
+        if(author.value ==='' || author.value === NaN || author.value.length === 0){
+            labelauthor.style.display="block"
+            labelauthor.style.color="red"
+        }
+        else{
+
+        }
+
+        if(title.value ==='' || title.value === NaN || title.value.length === 0){
+            // console.log("empty title",title.value.length)
+            labeltitle.style.display="block"
+            labeltitle.style.color="red"
+        }
+        else{
+            labeltitle.style.display="none"
+        }
+
+        if(content.value==='' || content.value === NaN){
+            // console.log("empty content")
+            
+            labelcontent.style.display="block"
+            labelcontent.style.color="red"
+        }
+        else{
+            labelcontent.style.display="none"
+        }
+      
+      
+        }
+        else{
+                location.href='/postitem'
+        }
+    
+            
+          
+       })
+  
+
+   </script>
+   <script>
+
+    const pattern = {
+        title:/^[a-zA-Z\d]{4,12}$/i,
+        author:/^[a-zA-Z\d]{3,20}$/i,
+        // content:/^[\w]{10,200}$/i,
+
+    }
+    function validation(input,regex){
+        const inputfield = document.querySelector(".hide")
+            if(regex.test(input.value)){
+         
+                console.log(inputfield.value)
+          
+            
+                input.className ="shownormal"
+                if(input.attributes.name.value === "title"){
+                    inputfield.classList.remove("showtitle")
+                }
+                else if(input.attributes.name.value === "author"){
+                    inputfield.classList.remove("showauthor")
+                }
+            }
+            else{
+            
+                console.log("Invalid")
+                input.className ="showerror"
+         
+                if(input.attributes.name.value === "title"){
+                    inputfield.className="showtitle";
+                }
+                else if(input.attributes.name.value === "author"){
+                    inputfield.className="showauthor"
+                }
+            
+            }
+    }
+    let getinput =document.querySelectorAll("input , textarea")
+    getinput.forEach(input=>{
+        input.addEventListener("keyup",(e)=>{
+                validation(e.target,pattern[e.target.attributes.name.value])
+        })
+    })
+
+   </script>
+</body>
+</html>

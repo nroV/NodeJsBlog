@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('./component/header') %>
+
+    <link rel="stylesheet" href="/navigation.css">
+    <link rel="stylesheet" href="/loginandsignup.css">
+    <script src=""></script>
+
+    <style>
+        input:focus {}
+
+        .valid:focus {
+            /* 
+            border: 4px solid green; */
+            background-color: green;
+            color: white;
+
+        }
+
+        .invalid:focus {
+
+            /* border: 4px solid red; */
+            background-color: rgb(179, 8, 8);
+            color: white;
+        }
+
+
+        #err,
+        #err1,
+        #err2,
+        #err3 {
+            display: none;
+        }
+
+        .show {
+            display: block;
+        }
+
+        #hide,
+        #hiden {
+            display: none;
+        }
+
+        .error {
+            display: block;
+        }
+
+        .erremail::placeholder,
+        .erruser::placeholder,
+        .errpass::placeholder,
+        .errpf::placeholder {
+            color: rgb(179, 8, 8);
+            font-weight: bold;
+        }
+
+        div.form-row>div.inner {
+            display: flex;
+            justify-content: space-between;
+        }
+
+
+        @media only screen and (max-width: 760px) {
+            section>p {
+                text-align: left;
+            }
+
+            main {
+                max-width: 650px;
+                margin: 120px auto;
+
+            }
+
+
+
+        }
+
+        @media only screen and (max-width: 400px) {
+
+            section>p {
+                text-align: left;
+            }
+
+            body {
+                background-color: #0A2647;
+            }
+
+            div.form-row>div.inner {
+                flex-direction: column;
+
+
+            }
+
+
+        }
+    </style>
+
+    <body>
+
+        <main>
+
+
+
+
+            <section>
+
+                <p style="text-align: center;">Sign Up</p>
+
+                <p style="font-size: 1.1em;font-weight:600;color: gray;margin-bottom:50px;">You can accomplish this
+                    a variety of ways. The key is to touch your reader somehow.</p>
+                <form action="/signup/post" method="POST" enctype="multipart/form-data" id="enter">
+                    <div class="form-row">
+                        <div style="" class="inner">
+                            <label for="">Email</label>
+                            <label class="" id="hide">Your email must be valid e.g yourname@domain.com</label>
+
+                        </div>
+
+                        <br>
+                        <input type="email" name="email" id="" class="email" value=""
+                            placeholder="yourname@example.com">
+
+
+
+                    </div>
+                    <div class="form-row">
+                        <div style="display: flex; justify-content: space-between;" class="inner">
+                            <label for="">Username</label> <br>
+
+                        </div>
+
+                        <input type="text" name="username" id="" placeholder="@examplename" style="margin-top: 15px;"
+                            class="username">
+                    </div>
+                    <div class="form-row">
+                        <div style="" class="inner">
+                            <label for="">Password</label>
+                            <label id="hiden" class="">Password must be 5 - 10 characters</label>
+
+                        </div>
+
+
+
+                        <input type="text" name="password" id="" placeholder="@password" style="margin-top: 15px;"
+                            class="password">
+                    </div>
+                    <div class="form-row">
+                        <div style="" class="inner">
+                            <label for="">Upload your profile</label> <br>
+
+                        </div>
+
+                        <input type="file" name="file" id="" class="file" title="Choose a video please"
+                            style="padding-top: 17px;margin-top: 15px;">
+                    </div>
+
+                    <div class="form-row">
+
+                        <input type="submit" value="Create an account" class="sub" style="color: black;">
+
+                    </div>
+                    <div class="form-row" style="text-align: center;color: bisque;">
+                        By signing up, you agree to the Terms of Service and Privacy Policy
+                    </div>
+
+
+                </form>
+                <center style="color: bisque;">
+                    Already have an account? <a href="/login">Login here</a>
+                </center>
+            </section>
+
+        </main>
+        <script>
+
+            let enters = document.querySelector("#enter")
+            let email = document.querySelector("input.email")
+            let user = document.querySelector("input.username")
+            let password = document.querySelector("input.password")
+            let file = document.querySelector("input.file")
+            enters.addEventListener("submit", (e) => {
+
+                console.log(email)
+                if (email.value.length === 0 || password.value.length === 0 || user.value.length === 0 || file.files[0].name === null) {
+                    e.preventDefault()
+
+                    console.log(email.value)
+                    email.classList.add("erremail")
+                    email.placeholder = "*Please enter your email address"
+                    email.style.border = "2px solid  rgb(179, 8, 8)"
+
+                    user.classList.add("erruser")
+                    user.placeholder = "*Please enter your username"
+                    user.style.border = "2px solid  rgb(179, 8, 8)"
+
+                    password.classList.add("errpass")
+                    password.placeholder = "*Please enter your password"
+                    password.style.border = "2px solid  rgb(179, 8, 8)"
+
+                    file.style.border = "2px solid  rgb(179, 8, 8)"
+
+                }
+
+
+
+                else {
+
+                    let labelget = document.querySelector("#hide")
+                    let labelpass = document.querySelector("#hiden")
+                    if (validate(email, pattern['email']) == false) {
+                        e.preventDefault()
+                        labelget.style.display = "none"
+                        labelget.style.color = "red"
+                    }
+
+                    if (validate(password, pattern['password']) == false) {
+                        e.preventDefault()
+                        labelpass.style.display = "block"
+                        labelpass.style.color = "red"
+
+                    }
+                    else {
+
+                        email.style.border = "0px solid  rgb(179, 8, 8)"
+                        password.style.border = "0px solid  rgb(179, 8, 8)"
+                        user.style.border = "0px solid  rgb(179, 8, 8)"
+                    }
+
+                }
+
+            })
+
+            function validate(inputss, regex) {
+
+                let labelget = document.querySelector("#hide")
+                let labelpass = document.querySelector("#hiden")
+                console.log(inputss)
+                if (regex.test(inputss.value)) {
+               
+            
+                    if (inputss.attributes.name.value === "password") {
+                        inputss.className = "valid"
+                        labelpass.style.display = "none"
+                        labelpass.style.color = "red"
+                    }
+                    else if (inputss.attributes.name.value === "email") {
+                        inputss.className = "valid"
+                        labelget.style.display = "none"
+                        labelget.style.color = "red"
+                    }
+                    return true;
+
+                    // console.log("matching")
+                }
+                else {
+                    console.log("Not match")
+               
+                    if (inputss.attributes.name.value == "password") {
+                        inputss.className = 'invalid'
+                        labelpass.style.display = "block"
+                        labelpass.style.color = "red"
+                    }
+                    else if (inputss.attributes.name.value == "email") {
+                        inputss.className = 'invalid'
+                        labelget.style.display = "block"
+                        labelget.style.color = "red"
+                    }
+
+                    return false;
+
+
+
+
+                }
+            }
+            const pattern = {
+                email: /^[\w]{4,15}@(gmail|email|yahoo){1}\.(com){1}$/ig,
+                password: /^[a-z\d]{4,12}$/i
+            }
+            let inputfield = document.querySelectorAll("input")
+            inputfield.forEach((input) => {
+                input.addEventListener("input", (e) => {
+                    // console.log(e.target.attributes.name.value)
+                    validate(e.target, pattern[e.target.attributes.name.value])
+                })
+            })
+
+
+        </script>
+
+    </body>
+
+</html>

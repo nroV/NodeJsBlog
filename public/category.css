@@ -1,0 +1,87 @@
+main .article {
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 50px   ;
+    max-width: 1200px;
+   
+}
+img{
+    height: 270px;
+    width: 100%;
+    object-fit: cover;
+}
+div.sorry > img{
+    max-height: 600px;
+}
+.article > .head{
+    grid-column: span 4;
+}
+
+.article > a{
+    color: black;
+    font-size: 1.22em;
+    font-weight: bold;
+}
+
+.article {
+
+}
+.title{
+    font-size: 1.15em;    
+}
+.date p, .category{
+    font-size: 0.75em;   
+    font-weight:normal;
+
+}
+
+.content > .title,.category,.date{
+    margin-top: 15px;
+}
+
+@media only screen and (max-width: 1070px) {
+
+  
+    main .article {
+        display: grid;
+        grid-template-columns: repeat(2,1fr);
+        gap: 50px   ;
+       
+    }
+    .article > .head{
+        grid-column: span 2;
+    }
+
+}
+
+@media only screen and (max-width: 760px) {
+
+  
+    main .article {
+        display: grid;
+        grid-template-columns: repeat(1,1fr);
+        gap: 50px   ;
+       
+    }
+    .article > .head{
+        grid-column: span 1;
+    }
+
+}
+@media only screen and (max-width: 590px) {
+
+    main{
+        max-width: 500px;
+    
+    }
+    main .article {
+        display: block;
+   
+   
+       
+    }
+    .article > .head{
+        grid-column: span 1;
+    }
+
+}
